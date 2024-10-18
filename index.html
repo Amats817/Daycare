@@ -3,9 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Daycare System</title>
+    <link rel="stylesheet" href="./css/style.css"/>
 </head>
 <body>
-    
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Daycare</h2>
+        </div>
+        <ul class="nav-list">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Class</a></li>
+        </ul>
+    </div>
+
+    <div class="title">
+        <h1>Time & Attendance</h1>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Child Name</th>
+                <th>Status</th>
+                <th>Sign In</th>
+                <th>Sign Out</th>
+            </tr>
+        </thead>
+        <tbody id="attendance-table">
+            <!-- make sure to add id for each student -->
+            <tr>
+                <td>John Doe</td>
+                <td id="status-1"><span class="absent">&#10060;</span></td>
+                <td id="signin-1"><button onclick="signIn(1)">Sign In</button></td>
+                <td id="signout-1"><button onclick="signOut(1)" disabled>Sign Out</button></td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td id="status-2"><span class="absent">&#10060;</span></td>
+                <td id="signin-2"><button onclick="signIn(2)">Sign In</button></td>
+                <td id="signout-2"><button onclick="signOut(2)" disabled>Sign Out</button></td>
+            </tr>
+            <tr>
+                <td>Brandon Ovwigho</td>
+                <td id="status-3"><span class="absent">&#10060;</span></td>
+                <td id="signin-3"><button onclick="signIn(3)">Sign In</button></td>
+                <td id="signout-3"><button onclick="signOut(3)" disabled>Sign Out</button></td>
+            </tr>
+            <tr>
+                <td>Ryan Chan</td>
+                <td id="status-4"><span class="absent">&#10060;</span></td>
+                <td id="signin-4"><button onclick="signIn(4)">Sign In</button></td>
+                <td id="signout-4"><button onclick="signOut(4)" disabled>Sign Out</button></td>
+            </tr>
+            <tr>
+                <td>Carlos Flores</td>
+                <td id="status-5"><span class="absent">&#10060;</span></td>
+                <td id="signin-5"><button onclick="signIn(5)">Sign In</button></td>
+                <td id="signout-5"><button onclick="signOut(5)" disabled>Sign Out</button></td>
+            </tr>
+            <tr>
+                <td>Levi Cervantes</td>
+                <td id="status-6"><span class="absent">&#10060;</span></td>
+                <td id="signin-6"><button onclick="signIn(6)">Sign In</button></td>
+                <td id="signout-6"><button onclick="signOut(6)" disabled>Sign Out</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="date-nav">
+        <button onclick="previousDay()">&#8592; Previous Day</button>
+        <span id="current-date"></span>
+        <button onclick="nextDay()">Next Day &#8594;</button>
+    </div>
+
+    <script src="./assets/scripts.js"></script>
 </body>
 </html>
