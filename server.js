@@ -49,7 +49,6 @@ app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUniniti
         res.sendFile(path.join(__dirname, './public/regComplete.html'));
     })
     app.all('*', (req, res) => {
-        console.log('asdsd')
     res.send('Error 404 - PAGE NOT FOUND');
     })
     /* Note: 
