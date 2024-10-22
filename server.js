@@ -56,11 +56,26 @@ app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUniniti
         'req' - request from user
         'res' - response from server
     */
+    //getting the sql request 
+    app.get('/', (req, res) => {
+        connection.query('select * from child', (req, res) => {
+            if (err) {
+                console.log('Error executing query: ', err);
+                res.status(500).send('Error retreiving data from database');
+                return;
+            } //end of if
+            res.json(results);
+        });
+    });
+
+    app.listen(3306, (req, res) => {
+        console.log('Server listening on port 3306');
+    });
 
 // Starts the server once you run this file.
 // To access the web app, go to web browser and type 'localhost:3000' into URL bar. (Make sure this file is running before you do this.)
 // The result should be that it displays the index.html file located in the 'public' folder.
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3306;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`http://localhost:3000`);
