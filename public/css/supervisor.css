@@ -72,3 +72,47 @@ header h1{
 .absent {
     background-color: #ee9993;
 }
+
+.confirm-button {
+    background-color: #172083a3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.confirm-button:hover {
+    background-color: #200667;
+}
+
+.date-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#prev-date, #next-date {
+    background-color: #8f72c2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#prev-date:hover, #next-date:hover {
+    background-color: #6730b4;
+}
+
+#current-date {
+    font-size: 1.2rem;
+    margin: 0 20px;
+}
+
