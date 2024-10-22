@@ -1,15 +1,16 @@
 // This file will connect to the database and assign it to the variable 'db'.
 // Then, it will export the database, assigned to 'db' variable, using ' module.exports = db; ' (as seen at the end of this file)
 // From there, we can import this database.js file within other JavaScript files using ' const db = require('./database'); '
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
-const connection = mysql.createConnection({
+const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'Class_Of_2033',
-    database: 'Local instance MySQL90'
+    database: 'child_daycare' // The name of the schema in MYSQL Workbench, change if you need to test.
+    // KEEP IN MIND, DATABASE PORT IS 3306, SERVER.JS PORT IS 3000. KEEP THEM DIFFERENT OR ELSE IT DOESN'T WORK!
 });
-connection.connect((err) => {
+db.connect((err) => {
     if(err) {
         console.error('Error connecting to database: ', err);
         return;
@@ -17,4 +18,4 @@ connection.connect((err) => {
     console.log('Connected to database');
 });
 
-module.exports = connection;
+module.exports = db;

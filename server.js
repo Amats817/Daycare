@@ -39,6 +39,23 @@ app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUniniti
 
 // The following code will handle URL directing for public files. (Files located in 'public' folder)
     // For example, if you goto localhost:3000/login it will serve you the login-reg.html file
+
+    //getting the sql request 
+    app.get('/dbTest', (req, res) => { // TO TEST THIS, GO TO localhost:3000/dbTest
+        console.log("GET / triggered");
+        
+        // Execute the SQL query test
+        connection.query('SELECT * FROM child', (err, results) => {
+            if (err) {
+                console.error('Error executing query: ', err);
+                res.status(500).send('Error retrieving data from database');
+                return;
+            }
+            // Send the results back as JSON
+            res.json(results);
+            console.log("Data successfully sent as JSON");
+        });
+    });
     app.get('/login', (req, res) => {
         res.sendFile(path.join(__dirname, './public/html/login-reg.html'));
     })
@@ -55,26 +72,11 @@ app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUniniti
         'req' - request from user
         'res' - response from server
     */
-    //getting the sql request 
-    app.get('/', (req, res) => {
-        connection.query('select * from child', (req, res) => {
-            if (err) {
-                console.log('Error executing query: ', err);
-                res.status(500).send('Error retreiving data from database');
-                return;
-            } //end of if
-            res.json(results);
-        });
-    });
-
-    /*pp.listen(3306, (req, res) => {
-        console.log('Server listening on port 3306');
-    }); */
 
 // Starts the server once you run this file.
 // To access the web app, go to web browser and type 'localhost:3000' into URL bar. (Make sure this file is running before you do this.)
 // The result should be that it displays the index.html file located in the 'public' folder.
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 3000; // // KEEP IN MIND, DATABASE PORT IS 3306, SERVER.JS PORT IS 3000. KEEP THEM DIFFERENT OR ELSE IT DOESN'T WORK!
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`http://localhost:3000`);
