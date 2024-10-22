@@ -42,7 +42,7 @@ app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUniniti
 
     //getting the sql request 
     app.get('/dbTest', (req, res) => { // TO TEST THIS, GO TO localhost:3000/dbTest
-        console.log("GET / triggered");
+        console.log("GET /dbTest triggered");
         
         // Execute the SQL query test
         connection.query('SELECT * FROM child', (err, results) => {
