@@ -1,0 +1,74 @@
+/* outfit */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+body {
+    font-family: Outfit, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1B1917;
+    color: white;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-weight: 400;
+}
+
+header {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+header h1{
+    font-size: 4rem;
+}
+
+#classes-section h1{
+    font-size: 2rem;
+    text-align: center;
+}
+
+#classes-section {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.class-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: space-around;
+}
+
+.class-card {
+    background-color: #57534F;
+    border-radius: 8px;
+    padding: 20px;
+    width: 30%;
+}
+
+.class-card h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.students {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.student {
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    color: black;
+}
+
+.present {
+    background-color: #aeecb0;
+}
+
+.absent {
+    background-color: #ee9993;
+}
