@@ -10,7 +10,7 @@ const app = express();                      // This creates an instance of an Ex
 app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUninitialized:true})) // This is used to store a secure login cookie for users. The 'secret' is a key used to sign session cookies.
 
 // Connect to the database using the 'database.js' file.
-    const db = require('./database'); 
+    const connection = require('./database'); 
 // Note: Connecting to the database in this file doesn't really matter here since we'll be doing database queries in another js file anyway. I put it here to just showcase it.
 
 // Importing bodyparser stuff into our express app.
@@ -67,9 +67,9 @@ app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUniniti
         });
     });
 
-    app.listen(3306, (req, res) => {
+    /*pp.listen(3306, (req, res) => {
         console.log('Server listening on port 3306');
-    });
+    }); */
 
 // Starts the server once you run this file.
 // To access the web app, go to web browser and type 'localhost:3000' into URL bar. (Make sure this file is running before you do this.)

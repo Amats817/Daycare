@@ -1,8 +1,8 @@
 // This file will connect to the database and assign it to the variable 'db'.
 // Then, it will export the database, assigned to 'db' variable, using ' module.exports = db; ' (as seen at the end of this file)
 // From there, we can import this database.js file within other JavaScript files using ' const db = require('./database'); '
+const mysql = require('mysql');
 
-const db = 'mysql';
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -17,4 +17,4 @@ connection.connect((err) => {
     console.log('Connected to database');
 });
 
-module.exports = db;
+module.exports = connection;
