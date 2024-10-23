@@ -7,7 +7,7 @@ const path = require('path');               // Imports path, which is a way for 
 const bodyParser = require('body-parser');  // Imports body-parser, which is used for parsing data such as JavaScript Objects
 const session = require('express-session'); // Imports express-session, which is middleware for Express.js that allows session management within the Web App.
 const app = express();                      // This creates an instance of an Express application and assigns it to the variable 'app'.
-app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUninitialized:true})) // This is used to store a secure login cookie for users. The 'secret' is a key used to sign session cookies.
+app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUninitialized:true, cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }})) // This is used to store a secure login cookie for users. The 'secret' is a key used to sign session cookies.
 
 // Connect to the database using the 'database.js' file.
     const connection = require('./database'); 

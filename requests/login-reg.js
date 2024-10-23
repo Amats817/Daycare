@@ -6,10 +6,47 @@ const db = require('../database');
 
 router.post('/login', (req, res) => {
     // Handles any HTTP post requests with the code 'login'
-
-    //
-    // Code Here
-    //
+    const { username, password } = req.body;
+    //const username = "test";
+    //const password = "test";
+   
+    db.query('SELECT * FROM login WHERE lower(username) = ? AND password = ?', [username.toLowerCase(), password], (err, rows) => {
+      if (err) {
+        console.error('Error querying database:', err.message);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      if (rows.length > 0) {  // Check if any row was returned
+        const row = rows[0];  // Access the first (and likely only) row
+        req.session.save(() => {
+            req.session.logged_in = true;
+            req.session.user = {
+            username: row.username,   // Saves username.
+            clearance: row.clearance  // Saves clearance level.
+          };
+          // Checks which clearance level the credentials have and redirects them to the appropiate page.
+          switch(req.session.user.clearance){
+            case 1: // Parent clearance
+              res.status(200).json({ redirect: '/parent' });
+              break;
+            case 2: // Teacher clearance
+              res.status(200).json({ redirect: '/teacher' });
+              break;
+            case 3: // Supervisor clearance
+              res.status(200).json({ redirect: '/supervisor' });
+              break;
+            case 4: // Testing purposes
+              res.status(200).json({ redirect: '/supervisor' });
+              break;
+            default:
+              res.redirect('/login');
+          }
+        });
+      } 
+      else {
+        res.status(401).json({ error: 'Incorrect username or password.' });
+      }
+    });
 });
 
 module.exports = router; // Export router to be used in 'server.js' file.
