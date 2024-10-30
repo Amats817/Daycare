@@ -79,5 +79,5 @@ app.use(session({secret:"Daycare!@#$%^&*()1234567890", resave:false, saveUniniti
 const PORT = process.env.PORT || 3000; // // KEEP IN MIND, DATABASE PORT IS 3306, SERVER.JS PORT IS 3000. KEEP THEM DIFFERENT OR ELSE IT DOESN'T WORK!
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`http://localhost:3000`);
+  console.log(`http://localhost:${PORT}`);
 });
