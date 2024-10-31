@@ -4,10 +4,10 @@
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
-    host: '10.100.24.152',
-    user: 'Ryan_C',
+    host: '25.4.154.178',
+    user: 'super_user',
     password: 'Class_of_2033',
-    database: 'child_day_care' // The name of the schema in MYSQL Workbench, change if you need to test.
+    database: 'child_daycare_db' // The name of the schema in MYSQL Workbench, change if you need to test.
     // KEEP IN MIND, DATABASE PORT IS 3306, SERVER.JS PORT IS 3000. KEEP THEM DIFFERENT OR ELSE IT DOESN'T WORK!
 });
 db.connect((err) => {
