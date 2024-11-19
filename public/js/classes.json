@@ -1,0 +1,64 @@
+[
+    {
+        "className": "Art Class",
+        "students": [
+            "Alice Johnson",
+            "Bob Smith",
+            "Catherine Lee",
+            "David Brown",
+            "Emily Davis",
+            "David Brown",
+            "Emily Davis",
+            "David Brown",
+            "Emily Davis",
+            "David Brown",
+            "Emily Davis",
+            "David Brown",
+            "Emily Davis",
+            "David Brown",
+            "Emily Davis",
+            "David Brown",
+            "Emily Davis"
+        ]
+    },
+    {
+        "className": "Science Class",
+        "students": [
+            "David Brown",
+            "Emily Davis",
+            "Frank Garcia"
+        ]
+    },
+    {
+        "className": "Math Class",
+        "students": [
+            "Grace Wilson",
+            "Henry Martinez",
+            "Isabella Taylor"
+        ]
+    },
+    {
+        "className": "Music Class",
+        "students": [
+            "Jack Anderson",
+            "Liam Thomas",
+            "Mia Moore"
+        ]
+    },
+    {
+        "className": "History Class",
+        "students": [
+            "Oliver Jackson",
+            "Sophia White",
+            "Emma Harris"
+        ]
+    },
+    {
+        "className": "Physical Education",
+        "students": [
+            "Noah Martin",
+            "Ava Thompson",
+            "Lucas Garcia"
+        ]
+    }
+]

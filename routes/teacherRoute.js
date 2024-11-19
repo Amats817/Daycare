@@ -5,7 +5,12 @@ const path = require('path');
 const db = require('../database');
 
 router.get("/", (req, res)=>{
-    verifyUser(req, res, '../teacher/teacher.html');
+    //res.sendFile(path.join(__dirname, '../teacher/class.html'));
+    verifyUser(req, res, '../teacher/class.html');
+})
+router.get("/attendance", (req, res)=>{
+    //res.sendFile(path.join(__dirname, '../teacher/attendance.html'));
+    verifyUser(req, res, '../teacher/attendance.html');
 })
 
 function verifyUser(req, res, dir){

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Manager</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Class Manager</h1>
+
+        <div>
+            <a href="/teacher/attendance">Attendance</a>
+            <a href="/teacher">Class Manager</a>
+        </div>
+            <button id="addClassBtn">Add Class</button>
+        </header>
+    
+        <div id="classContainer"></div>
+
+        <div id="classModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add New Class</h2>
+                <label for="className">Class Name:</label>
+                <input type="text" id="className" placeholder="Enter class name">
+        
+                <h3>Student Names:</h3>
+                <ul id="studentList"></ul>
+                <div class="add-student">
+                    <input type="text" id="studentNameInput" placeholder="Enter student name">
+                    <button id="addStudentBtn">Add Student</button>
+                </div>
+        
+                <button id="saveClassBtn">Save Class</button>
+            </div>
+        </div>
+        
+
+    <script src="/js/classModal.js"></script>
+</body>
+</html>

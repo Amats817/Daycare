@@ -46,7 +46,9 @@ app.use(session({
     // These request files will stored in the 'requests' folder. 
     // Right now we only have one request file but there will most likely be more added.
     const loginReg = require('./requests/login-reg');
+    const teacher = require('./requests/teacher-req');
     app.use(loginReg); // File to manage all requests associated with the login/registration page.
+    app.use(teacher);
 
 // The following code will handle URL directing for public files. (Files located in 'public' folder)
     // For example, if you goto localhost:3000/login it will serve you the login-reg.html file
@@ -68,17 +70,18 @@ app.use(session({
         });
     });
     app.get('/login', (req, res) => {
-        res.sendFile(path.join(__dirname, './public/html/login-reg.html'));
-    })
+        res.sendFile(path.join(__dirname, './public/index.html'));
+        //res.sendFile(path.join(__dirname, './public/html/login-reg.html'));
+    });
     app.get('/register', (req, res) => {
         res.sendFile(path.join(__dirname, './public/html/login-reg.html'));
-    })
+    });
     app.get('/registrationComplete', (req, res) => {
         res.sendFile(path.join(__dirname, './public/regComplete.html'));
-    })
+    });
     app.all('*', (req, res) => {
         res.send('Error 404 - PAGE NOT FOUND');
-    })
+    });
     /* Note: 
         'req' - request from user
         'res' - response from server
