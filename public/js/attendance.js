@@ -1,6 +1,6 @@
-// Specify the class name you want to display
+// Specify the class ID to fetch data for this class (passed in the URL query string)
 const urlParams = new URLSearchParams(window.location.search);
-const targetClassName = urlParams.get("className");// Change this to the desired class name
+const targetClassId = urlParams.get("classId");  // Use classId to fetch the specific class
 
 // Function to fetch class data and display the specified class
 function fetchAndDisplayClass() {
@@ -14,8 +14,8 @@ function fetchAndDisplayClass() {
         })
         .then(data => {
             console.log("Fetched data:", data); // Log parsed JSON
-            // Find the class with the specified name
-            const classItem = data.find(item => item.className === targetClassName);
+            // Find the class with the specified classId
+            const classItem = data.find(item => item.class_id === parseInt(targetClassId));
 
             if (classItem) {
                 const attendanceContainer = document.createElement('div');
@@ -23,7 +23,8 @@ function fetchAndDisplayClass() {
 
                 const classDiv = document.createElement('div');
                 classDiv.className = 'class-item';
-                classDiv.innerHTML = `<h3>${classItem.className}</h3>`;
+                classDiv.innerHTML = `<h3>${classItem.className}</h3>
+                                      <p>Schedule: ${classItem.classStart} - ${classItem.classEnd}</p>`;
 
                 const studentList = document.createElement('ul');
                 classItem.students.forEach(student => {
@@ -63,7 +64,7 @@ function fetchAndDisplayClass() {
                 document.body.appendChild(attendanceContainer);
             } else {
                 const errorDiv = document.createElement('div');
-                errorDiv.textContent = `Class "${targetClassName}" not found.`;
+                errorDiv.textContent = `Class with ID "${targetClassId}" not found.`;
                 document.body.appendChild(errorDiv);
             }
         })
@@ -90,7 +91,7 @@ function submitAttendance() {
 
     const attendanceData = {
         date: attendanceDate,
-        className: targetClassName,
+        classId: targetClassId,  // Send classId along with the attendance data
         students: students,
     };
 
@@ -148,6 +149,5 @@ function removeMessage() {
         message.remove();
     }
 }
-
 
 fetchAndDisplayClass();

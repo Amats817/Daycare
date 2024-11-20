@@ -44,7 +44,7 @@ CREATE TABLE class (
 CREATE TABLE classEnroll (
     class_id INT(10),
     child_id INT(10),
-    enrollDate DATE,
+    enrollDate DATE DEFAULT (CURRENT_DATE()),
     FOREIGN KEY (class_id) REFERENCES class(class_id),
     FOREIGN KEY (child_id) REFERENCES child(child_id)
 );
