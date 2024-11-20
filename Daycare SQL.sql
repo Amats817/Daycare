@@ -38,8 +38,7 @@ CREATE TABLE class (
     teacher_id INT(10),
     FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id),
     classStart TIME,
-    classEnd TIME,
-    numOfStudents INT(10)
+    classEnd TIME
 );
 
 CREATE TABLE classEnroll (
@@ -84,12 +83,6 @@ CREATE TABLE attendance (
     FOREIGN KEY (class_id) REFERENCES class(class_id) ON DELETE CASCADE
 );
 
-
-INSERT INTO teacherLogin(teacher_id, t_username, t_password)
-	VALUES
-	(1, "Ryan", "123"),
-    (2, "Mark", "123");
-
 INSERT INTO parent (parent_id, fname, lname, phoneNum) VALUES
    (1, 'John', 'Smith', 1234567890),
    (2, 'Mary', 'Johnson', 2345678901),
@@ -111,11 +104,11 @@ INSERT INTO security (guard_id, fname, lname) VALUES
    (1, 'David', 'Harris'),
    (2, 'Laura', 'Clark');
    
-INSERT INTO class (class_id, class_subject, teacher_id, classStart, classEnd, numOfStudents) VALUES
-   (1, "Art", 1, '08:00:00', '10:00:00', 20),
-   (2, "History", 2, '10:30:00', '12:30:00', 15),
-   (3, "Math", 3, '13:00:00', '15:00:00', 18),
-   (4, "Music", 1, '15:30:00', '16:30:00', 20);
+INSERT INTO class (class_id, class_subject, teacher_id, classStart, classEnd) VALUES
+   (1, "Art", 1, '08:00:00', '10:00:00'),
+   (2, "History", 2, '10:30:00', '12:30:00'),
+   (3, "Math", 3, '13:00:00', '15:00:00'),
+   (4, "Music", 1, '15:30:00', '16:30:00');
    
 INSERT INTO classEnroll (class_id, child_id, enrollDate) VALUES
    (1, 1, '2024-01-15'),
@@ -133,3 +126,8 @@ INSERT INTO checkInAndOut (parent_id, child_id, checkIn, checkOut) VALUES
    (1, 1, '2024-03-01 08:00:00', '2024-03-01 15:00:00'),
    (2, 2, '2024-03-01 09:00:00', '2024-03-01 14:00:00'),
    (3, 3, '2024-03-01 08:30:00', '2024-03-01 15:30:00');
+   
+INSERT INTO teacherLogin(teacher_id, t_username, t_password)
+	VALUES
+	(1, "Ryan", "123"),
+    (2, "Mark", "123");
