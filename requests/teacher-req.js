@@ -97,8 +97,12 @@ router.post("/save-class", async (req, res) => {
                 `INSERT INTO classEnroll (class_id, child_id) 
                  VALUES (?, ?)`,
                 [classId, student.child_id]
-            )
+            ).catch(error => {
+                console.error(`Failed to enroll student ${student.child_id}:`, error.message);
+                throw new Error(`Enrollment failed for student ${student.child_id}`);
+            })
         );
+        
 
         await Promise.all(enrollPromises);
 
@@ -144,6 +148,41 @@ router.delete("/delete-class", async (req, res) => {
     }
 });
 
+router.post("/verify-student", async (req, res) => {
+    if (!req.session || !req.session.logged_in) {
+        return res.status(401).json({ error: "Not logged in." });
+    }
+
+    const { studentName, studentId } = req.body;
+
+    if (!studentName || !studentId) {
+        return res.status(400).json({ error: "Student name and ID are required." });
+    }
+
+    try {
+        // Split student name into first and last name
+        const [fname, lname] = studentName.split(" ");
+
+        if (!fname || !lname) {
+            return res.status(400).json({ error: "Student name must include first and last name." });
+        }
+
+        // Query the database to check if the student exists
+        const [rows] = await db.query(
+            `SELECT child_id 
+             FROM child 
+             WHERE child_id = ? AND fname = ? AND lname = ?`,
+            [studentId, fname, lname]
+        );
+
+        // Check if the student exists
+        const isValid = rows.length > 0;
+        res.json({ isValid });
+    } catch (error) {
+        console.error("Error verifying student:", error.message);
+        res.status(500).json({ error: "Failed to verify student." });
+    }
+});
 
 
 router.post("/submit-attendance", async (req, res) => {

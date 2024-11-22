@@ -58,25 +58,78 @@ window.onclick = function (event) {
 // Add individual student
 addStudentBtn.onclick = function () {
     const studentName = studentNameInput.value.trim();
-    if (studentName) {
-        const li = document.createElement("li");
-        li.innerHTML = `${studentName} <button class="remove-student">❌</button>`;
-        studentList.appendChild(li);
+    const studentId = document.getElementById("studentIdInput").value.trim(); // Get student ID from input
 
-        studentNameInput.value = "";
+    if (studentName && studentId) {
+        // Check if the student ID already exists in the list
+        const isDuplicate = Array.from(studentList.getElementsByTagName("li")).some(li => 
+            li.textContent.includes(`(${studentId})`)
+        );
 
-        li.querySelector(".remove-student").onclick = function () {
-            li.remove();
-        };
+        if (isDuplicate) {
+            alert("This student has already been added to the class.");
+            return;
+        }
+
+        // Call the backend to verify student ID and name
+        verifyStudent(studentName, studentId)
+            .then(isValid => {
+                if (isValid) {
+                    // Add the student to the list if verification is successful
+                    const li = document.createElement("li");
+                    li.innerHTML = `${studentName} (${studentId}) <button class="remove-student">❌</button>`;
+                    studentList.appendChild(li);
+
+                    studentNameInput.value = "";
+                    document.getElementById("studentIdInput").value = ""; // Clear student ID input
+
+                    li.querySelector(".remove-student").onclick = function () {
+                        li.remove();
+                    };
+                } else {
+                    alert("Invalid student name or ID. Please check and try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error verifying student:", error);
+                alert("Failed to verify student. Please try again.");
+            });
     } else {
-        alert("Please enter a valid student name.");
+        alert("Please enter a valid student name and ID.");
     }
 };
+
+
+// Function to verify student ID and name with the backend
+function verifyStudent(studentName, studentId) {
+    return fetch('/verify-student', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ studentName, studentId }),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => data.isValid) // Assuming the backend returns { isValid: true/false }
+        .catch(error => {
+            console.error("Error during verification:", error);
+            throw error;
+        });
+}
+
 
 // Save class and students
 saveClassBtn.onclick = function () {
     const className = document.getElementById("className").value.trim();
-    const students = Array.from(studentList.getElementsByTagName("li")).map(li => li.textContent.replace("❌", "").trim());
+    const students = Array.from(studentList.getElementsByTagName("li")).map(li => {
+        const [name, id] = li.textContent.replace("❌", "").trim().split(" (");
+        return { child_name: name, child_id: id.replace(")", "") };
+    });
     const startTime = startTimeInput.value.trim();
     const endTime = endTimeInput.value.trim();
 
@@ -112,7 +165,7 @@ function createClassCard(className, students, startTime, endTime, classId) {
         <h3>${className}</h3>
         <p>Class ID: ${classId}</p>
         <p>Schedule: ${startTime} - ${endTime}</p>
-        <p>Students: ${students.map(student => student.child_name).join(", ")}</p>
+        <p>Students: ${students.map(student => `${student.child_name} (${student.child_id})`).join(", ")}</p>
     `;
     classLink.style.textDecoration = "none"; // Remove underline for the link
     classLink.style.color = "inherit"; // Keep link text color same as card
@@ -185,8 +238,9 @@ function saveClassToDatabase(className, students, startTime, endTime) {
         })
         .then(data => {
             console.log('Class saved successfully:', data);
-            return data.classId; // Assuming the backend returns the `class_id` in the response
+            return data.class_id; // Match backend property
         });
+        
 }
 
 

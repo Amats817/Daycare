@@ -33,7 +33,7 @@ CREATE TABLE security (
 );
 
 CREATE TABLE class (
-    class_id INT(10) PRIMARY KEY NOT NULL,
+    class_id INT(10) AUTO_INCREMENT PRIMARY KEY NOT NULL,
     class_subject varchar(30),
     teacher_id INT(10),
     FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id),
@@ -45,7 +45,7 @@ CREATE TABLE classEnroll (
     class_id INT(10),
     child_id INT(10),
     enrollDate DATE DEFAULT (CURRENT_DATE()),
-    FOREIGN KEY (class_id) REFERENCES class(class_id),
+    FOREIGN KEY (class_id) REFERENCES class(class_id) ON DELETE CASCADE,
     FOREIGN KEY (child_id) REFERENCES child(child_id)
 );
 
@@ -131,3 +131,4 @@ INSERT INTO teacherLogin(teacher_id, t_username, t_password)
 	VALUES
 	(1, "Ryan", "123"),
     (2, "Mark", "123");
+
