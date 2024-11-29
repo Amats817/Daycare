@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');  // Imports body-parser, which is use
 const session = require('express-session'); // Imports express-session, which is middleware for Express.js that allows session management within the Web App.
 const app = express();                      // This creates an instance of an Express application and assigns it to the variable 'app'.
 
+
 // This is used to store a secure login cookie for users. The 'secret' is a key used to sign session cookies.
 app.use(session({
     secret: "Daycare!@#$%^&*()1234567890",
@@ -74,7 +75,7 @@ app.use(session({
         //res.sendFile(path.join(__dirname, './public/html/login-reg.html'));
     });
     app.get('/register', (req, res) => {
-        res.sendFile(path.join(__dirname, './public/html/login-reg.html'));
+        res.sendFile(path.join(__dirname, './public/html/Register.html'));
     });
     app.get('/registrationComplete', (req, res) => {
         res.sendFile(path.join(__dirname, './public/regComplete.html'));

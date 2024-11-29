@@ -32,8 +32,6 @@ router.get("/retrieve/class", async (req, res) => {
                 c.teacher_id = ?
         `, [teacherId]);
 
-        console.log("Query result:", rows);
-
         if (rows.length === 0) {
             return res.status(404).json({ error: "No classes found for the teacher." });
         }
