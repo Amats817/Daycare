@@ -15,21 +15,24 @@
     <div class="login-section">
         <div class="form-box Register">
             <h2>Welcome</h2>
-            <div class="input-box">
-                <input type="text" required>
-                <label for="">Name</label>
-            </div>
-            <div class="input-box">
-                <input type="email" required>
-                <label for="">Email</label>
-            </div>
-            <div class="input-box">
-                <input type="password" required>
-                <label for="">Password</label>
-            </div>
-            <div class="input-box">
-                <button class="btn">Register</button>
-            </div>
+            <form action="/register" method="POST">
+                <div class="input-box">
+                    <input type="text" name="name" required>
+                    <label for="name">Name</label>
+                </div>
+                <div class="input-box">
+                    <input type="email" name="email" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password" required>
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-box">
+                    <button type="submit" class="btn" id="registerBtn">Register</button>
+                </div>
+            </form>
+                   
             <div class="term-condition">
                 <label for=""><input type="checkbox" name="" id="">Yes, I agree with the terms and conditions</label>
             </div>
